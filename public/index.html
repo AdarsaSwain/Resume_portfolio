@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>Resume to Portfolio: turn a resume into a portfolio site</title>
+<meta name="description" content="Paste or upload a resume and get a finished one-page portfolio site to download, host or share by link.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light dark;--land:light-dark(#fbfbf2,#0d1c24);--sea:light-dark(#bfe3ee,#123442);--ink:light-dark(#13242e,#e6f0f3);--muted:light-dark(#4a5b63,#a2b8c0);--brown:light-dark(#a8551b,#e3a476);--mag:#d6127e;--magt:light-dark(#b30e69,#ff7dbd);--panel:light-dark(#ffffff,#0f2731);--line:light-dark(#d7dccb,#2a4653)}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:16px}
+html,body{margin:0}
+body{background:var(--land);color:var(--ink);font:17px/1.55 Overpass,system-ui,sans-serif;overflow-x:clip}
+a{color:var(--magt);font-weight:700}
+a:focus-visible,button:focus-visible{outline:3px solid var(--mag);outline-offset:2px}
+.band{padding-block:clamp(40px,6vw,80px);padding-left:max(4vw,16px,env(safe-area-inset-left,0px));padding-right:max(4vw,16px,env(safe-area-inset-right,0px))}
+.in{max-width:1320px;margin:0 auto}
+h1,h2,h3{font-weight:800;letter-spacing:-.02em;line-height:1.1;margin:0;text-wrap:balance}
+p{margin:0}
+.nav{padding-block:18px}
+.nav .in{display:flex;align-items:center;gap:24px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;font-weight:800;font-size:18px}
+.brand i{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--mag);color:#fff;font-style:normal;font-size:14px}
+.nav nav{display:flex;gap:22px;margin-left:auto}
+.nav nav a{color:var(--muted);text-decoration:none;font-weight:600;font-size:16px}
+.nav nav a:hover{color:var(--ink)}
+.hero{padding-top:clamp(24px,5vw,64px)}
+.hero h1{font-size:clamp(40px,7vw,84px);line-height:1;max-width:14ch}
+.hero p{margin-top:20px;max-width:56ch;font-size:clamp(18px,2vw,21px);color:var(--muted)}
+.cta{display:inline-flex;align-items:center;min-height:56px;margin-top:28px;padding:0 28px;border-radius:14px;background:var(--mag);color:#fff;text-decoration:none;font-weight:800;font-size:18px}
+.cta:hover{background:#b80f6c}
+.work{background:var(--sea);padding-block:clamp(24px,3.5vw,48px)}
+h2{font-size:clamp(28px,3.6vw,40px);margin-bottom:28px}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,48px);counter-reset:s}
+.steps li{counter-increment:s;border-top:2px solid var(--ink);padding-top:16px}
+.steps li::before{content:counter(s);display:block;font-weight:800;font-size:15px;color:var(--brown);margin-bottom:6px}
+h3{font-size:21px;margin-bottom:6px}
+.steps p,.ways p,.embed p{color:var(--muted)}
+.embed{background:var(--panel);border-block:1px solid var(--line)}
+.embed .in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:clamp(24px,5vw,72px);align-items:start}
+.embed h2{margin-bottom:14px}
+.embed ul{margin:18px 0 0;padding-left:20px;color:var(--muted)}
+.embed li{margin:6px 0}
+.code{position:relative;border:1px solid var(--line);border-radius:16px;background:var(--land);overflow:hidden}
+.code pre{margin:0;padding:20px;overflow-x:auto;font:14px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;tab-size:2}
+.code button{position:absolute;top:10px;right:10px;min-height:36px;padding:0 14px;border-radius:999px;border:1.5px solid var(--line);background:var(--panel);color:var(--ink);font:700 13px Overpass,sans-serif;cursor:pointer}
+.code button:hover{border-color:var(--ink)}
+.ways{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,48px)}
+footer{border-top:1px solid var(--line);padding-block:28px;font-size:15px;color:var(--brown)}
+@media(max-width:860px){.steps,.ways,.embed .in{grid-template-columns:minmax(0,1fr)}.nav nav a:not(:last-child){display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="band nav"><div class="in">
+  <a class="brand" href="./"><i>RP</i>Resume to Portfolio</a>
+  <nav aria-label="Sections">
+    <a href="#how">How it works</a>
+    <a href="#embed">For your site</a>
+    <a href="#host">Hosting</a>
+    <a href="#builder">Build mine</a>
+  </nav>
+</div></header>
+
+<section class="band hero"><div class="in">
+  <h1>Share your resume. Get a portfolio site.</h1>
+  <p>Paste or upload a resume and get a finished one-page site with a hero, experience, projects, skills and contact. Download it, host it anywhere, or send it as a link.</p>
+  <a class="cta" href="#builder">Build my portfolio</a>
+</div></section>
+
+<main class="band work" id="builder"><div class="in">
+  <resume-portfolio id="rp"></resume-portfolio>
+</div></main>
+
+<section class="band" id="how"><div class="in">
+  <h2>How it works</h2>
+  <ol class="steps">
+    <li><h3>Add your resume</h3><p>Paste the text or drop in a PDF, TXT or Markdown file. Clear headings such as Experience, Projects and Skills give the best result.</p></li>
+    <li><h3>Pick a look</h3><p>Choose one of five designs and an accent colour, check it on desktop and phone, and fix any detail under Edit details.</p></li>
+    <li><h3>Download or share</h3><p>Save the site as a single HTML file you can host anywhere, or copy a link that opens the portfolio straight away.</p></li>
+  </ol>
+</div></section>
+
+<section class="band embed" id="embed"><div class="in">
+  <div>
+    <h2>Add the builder to your own site</h2>
+    <p>The builder is one script and one tag. It keeps its styles to itself, fits the width you give it, and follows your page’s light or dark mode.</p>
+    <ul>
+      <li><b>parse-endpoint</b> sends resumes to your server for AI parsing.</li>
+      <li><b>share-url</b> points share links at your own viewer page.</li>
+      <li><b>theme</b> and <b>accent</b> set the starting look.</li>
+      <li>The <b>portfolio-built</b> event hands your page the data and the finished HTML.</li>
+    </ul>
+    <p style="margin-top:18px"><a href="embed-demo.html">See it running inside another page</a></p>
+  </div>
+  <div class="code">
+    <button type="button" id="copySnippet">Copy</button>
+<pre id="snippet">&lt;script src="/plugin/resume-portfolio.js" defer&gt;&lt;/script&gt;
+
+&lt;resume-portfolio
+  theme="midnight"
+  accent="#0f8a5f"
+  parse-endpoint="/api/parse"
+  share-url="/view.html"&gt;
+&lt;/resume-portfolio&gt;
+
+&lt;script&gt;
+  document.addEventListener('portfolio-built', e =&gt; {
+    console.log(e.detail.data, e.detail.html);
+  });
+&lt;/script&gt;</pre>
+  </div>
+</div></section>
+
+<section class="band" id="host"><div class="in">
+  <h2>Put your portfolio online</h2>
+  <div class="ways">
+    <article><h3>GitHub Pages</h3><p>Create a repository named yourname.github.io, upload the file as index.html, and it is served at https://yourname.github.io. <a href="https://pages.github.com/">Guide</a></p></article>
+    <article><h3>Netlify Drop</h3><p>Rename the file to index.html, put it in a folder, and drag the folder onto Netlify Drop for a live link. Sign in to keep the site. <a href="https://app.netlify.com/drop">Open Netlify Drop</a></p></article>
+    <article><h3>Vercel</h3><p>Put index.html in a folder, run npx vercel inside it, and follow the prompts. Add your own domain later from the dashboard. <a href="https://vercel.com/docs/cli">CLI docs</a></p></article>
+  </div>
+</div></section>
+
+<footer class="band"><div class="in">
+  <p id="privacy">Your resume is read in this browser and is not uploaded. A share link holds the portfolio inside the link itself, so nothing is stored on a server.</p>
+</div></footer>
+
+<script src="plugin/resume-portfolio.js"></script>
+<script>
+// When the site runs on its own server with AI parsing switched on, use it.
+if (location.protocol.startsWith('http')) {
+  fetch('api/health').then(r => r.ok ? r.json() : null).then(h => {
+    if (!h || !h.ai) return;
+    document.getElementById('rp').setAttribute('parse-endpoint', 'api/parse');
+    document.getElementById('privacy').textContent = 'When you press Build, your resume text is sent to this site’s server and to Anthropic’s Claude to be read; it is not stored. A share link holds the portfolio inside the link itself.';
+  }).catch(() => {});
+}
+document.getElementById('copySnippet').addEventListener('click', async e => {
+  try { await navigator.clipboard.writeText(document.getElementById('snippet').textContent); e.target.textContent = 'Copied'; }
+  catch (err) { e.target.textContent = 'Select and copy'; }
+  setTimeout(() => { e.target.textContent = 'Copy'; }, 1600);
+});
+</script>
+</body>
+</html>

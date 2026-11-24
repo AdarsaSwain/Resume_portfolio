@@ -1,0 +1,18 @@
+{
+  "name": "resume-to-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Turn a resume into a one-page portfolio site. Standalone site plus an embeddable <resume-portfolio> plugin.",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.13.0",
+    "express": "^4.21.0",
+    "zod": "^4.6.7"
+  }
+}
