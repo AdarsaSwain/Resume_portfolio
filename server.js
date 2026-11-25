@@ -108,7 +108,12 @@ app.post('/api/parse', express.json({ limit: '200kb' }), async (req, res) => {
 const here = path.dirname(fileURLToPath(import.meta.url));
 app.use(express.static(path.join(here, 'public'), { extensions: ['html'] }));
 
-app.listen(PORT, () => {
-  console.log(`Resume to Portfolio running at http://localhost:${PORT}`);
-  console.log(AI_ENABLED ? `AI parsing on (${MODEL}).` : 'AI parsing off: set ANTHROPIC_API_KEY to turn it on. The built-in parser is used meanwhile.');
-});
+// On Vercel the platform runs the exported app and serves public/ itself; locally we listen on a port.
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`Resume to Portfolio running at http://localhost:${PORT}`);
+    console.log(AI_ENABLED ? `AI parsing on (${MODEL}).` : 'AI parsing off: set ANTHROPIC_API_KEY to turn it on. The built-in parser is used meanwhile.');
+  });
+}
+
+export default app;
